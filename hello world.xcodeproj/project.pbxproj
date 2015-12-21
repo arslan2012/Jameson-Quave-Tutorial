@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F577D3BF1C2793DB00AA7B21 /* ITunesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F577D3BE1C2793DB00AA7B21 /* ITunesAPI.swift */; };
 		F58356D11C26D412005708CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58356D01C26D412005708CB /* AppDelegate.swift */; };
-		F58356D31C26D412005708CB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58356D21C26D412005708CB /* ViewController.swift */; };
+		F58356D31C26D412005708CB /* SearchResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58356D21C26D412005708CB /* SearchResultsViewController.swift */; };
 		F58356D61C26D412005708CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58356D41C26D412005708CB /* Main.storyboard */; };
 		F58356D81C26D412005708CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F58356D71C26D412005708CB /* Assets.xcassets */; };
 		F58356DB1C26D412005708CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F58356D91C26D412005708CB /* LaunchScreen.storyboard */; };
@@ -34,9 +35,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F577D3BE1C2793DB00AA7B21 /* ITunesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ITunesAPI.swift; sourceTree = "<group>"; };
 		F58356CD1C26D412005708CB /* hello world.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "hello world.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F58356D01C26D412005708CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F58356D21C26D412005708CB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F58356D21C26D412005708CB /* SearchResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultsViewController.swift; sourceTree = "<group>"; };
 		F58356D51C26D412005708CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F58356D71C26D412005708CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F58356DA1C26D412005708CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -98,8 +100,9 @@
 			isa = PBXGroup;
 			children = (
 				F58356D01C26D412005708CB /* AppDelegate.swift */,
-				F58356D21C26D412005708CB /* ViewController.swift */,
+				F58356D21C26D412005708CB /* SearchResultsViewController.swift */,
 				F58356D41C26D412005708CB /* Main.storyboard */,
+				F577D3BE1C2793DB00AA7B21 /* ITunesAPI.swift */,
 				F58356D71C26D412005708CB /* Assets.xcassets */,
 				F58356D91C26D412005708CB /* LaunchScreen.storyboard */,
 				F58356DC1C26D412005708CB /* Info.plist */,
@@ -256,7 +259,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F58356D31C26D412005708CB /* ViewController.swift in Sources */,
+				F577D3BF1C2793DB00AA7B21 /* ITunesAPI.swift in Sources */,
+				F58356D31C26D412005708CB /* SearchResultsViewController.swift in Sources */,
 				F58356D11C26D412005708CB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -400,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "hello world/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Arslan.hello-world";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -411,6 +416,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "hello world/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Arslan.hello-world";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,6 +490,7 @@
 				F58356F71C26D412005708CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F58356F81C26D412005708CB /* Build configuration list for PBXNativeTarget "hello worldTests" */ = {
 			isa = XCConfigurationList;
@@ -492,6 +499,7 @@
 				F58356FA1C26D412005708CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F58356FB1C26D412005708CB /* Build configuration list for PBXNativeTarget "hello worldUITests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +508,7 @@
 				F58356FD1C26D412005708CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
