@@ -62,8 +62,8 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
                     // The image isn't cached, download the img data
                     // We should perform this in a background thread
                     let request: NSURLRequest = NSURLRequest(URL: imgURL)
-                    let mainQueue = NSOperationQueue.mainQueue()
-                    NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+                    let session = NSURLSession.sharedSession()
+                    let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
                         if error == nil {
                             // Convert the downloaded data in to a UIImage object
                             let image = UIImage(data: data!)
@@ -80,6 +80,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
                             print("Error: \(error!.localizedDescription)")
                         }
                     })
+                    task.resume()
                 }
                 
         }
