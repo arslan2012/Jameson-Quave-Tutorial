@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SearchResultsViewController.swift
 //  hello world
 //
 //  Created by ئ‍ارسلان ئابلىكىم on 12/20/15.
@@ -15,6 +15,7 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
     var data: NSMutableData = NSMutableData()
     var tableData: NSArray = NSArray()
     let api = iTunesAPI()
+    var imageCache = [String:UIImage]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,28 +34,55 @@ class SearchResultsViewController: UIViewController, UITableViewDataSource, UITa
         return tableData.count
     }
     
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        //let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "MyTestCell")
         let cell: UITableViewCell = tableView.dequeueReusableCellWithIdentifier("SearchResultCell")! as UITableViewCell
         
-        let rowData: NSDictionary = self.tableData[indexPath.row] as! NSDictionary
-        
-        cell.textLabel!.text = (rowData["trackName"] as! String)
-        
-        // Grab the artworkUrl60 key to get an image URL for the app's thumbnail
-        let urlString: NSString = rowData["artworkUrl60"] as! NSString
-        let imgURL: NSURL = NSURL(string: urlString as String)!
-        
-        // Download an NSData representation of the image at the URL
-        let imgData: NSData = NSData(contentsOfURL: imgURL)!
-        cell.imageView?.image = UIImage(data: imgData)
-        
-        // Get the formatted price string for display in the subtitle
-        let formattedPrice: NSString = rowData["formattedPrice"] as! NSString
-        
-        cell.detailTextLabel!.text = formattedPrice as String
-        
+        if let rowData: NSDictionary = self.tableData[indexPath.row] as? NSDictionary,
+            // Grab the artworkUrl60 key to get an image URL for the app's thumbnail
+            urlString = rowData["artworkUrl60"] as? String,
+            imgURL = NSURL(string: urlString),
+            // Get the formatted price string for display in the subtitle
+            formattedPrice = rowData["formattedPrice"] as? String,
+            // Get the track name
+            trackName = rowData["trackName"] as? String {
+                // Get the formatted price string for display in the subtitle
+                cell.detailTextLabel?.text = formattedPrice
+                // Update the textLabel text to use the trackName from the API
+                cell.textLabel?.text = trackName
+                
+                // Start by setting the cell's image to a static file
+                // Without this, we will end up without an image view!
+                cell.imageView?.image = UIImage(named: "Blank52")
+                
+                // If this image is already cached, don't re-download
+                if let img = imageCache[urlString] {
+                    cell.imageView?.image = img
+                }
+                else {
+                    // The image isn't cached, download the img data
+                    // We should perform this in a background thread
+                    let request: NSURLRequest = NSURLRequest(URL: imgURL)
+                    let mainQueue = NSOperationQueue.mainQueue()
+                    NSURLConnection.sendAsynchronousRequest(request, queue: mainQueue, completionHandler: { (response, data, error) -> Void in
+                        if error == nil {
+                            // Convert the downloaded data in to a UIImage object
+                            let image = UIImage(data: data!)
+                            // Store the image in to our cache
+                            self.imageCache[urlString] = image
+                            // Update the cell
+                            dispatch_async(dispatch_get_main_queue(), {
+                                if let cellToUpdate = tableView.cellForRowAtIndexPath(indexPath) {
+                                    cellToUpdate.imageView?.image = image
+                                }
+                            })
+                        }
+                        else {
+                            print("Error: \(error!.localizedDescription)")
+                        }
+                    })
+                }
+                
+        }
         return cell
     }
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
