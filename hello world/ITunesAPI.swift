@@ -12,7 +12,10 @@ protocol iTunesAPIProtocol {
 }
 
 class iTunesAPI{
-    var delegate: iTunesAPIProtocol?
+    var delegate: iTunesAPIProtocol
+    init(delegate: iTunesAPIProtocol) {
+        self.delegate = delegate
+    }
     func searchItunesFor(searchTerm: String) {
         
         // The iTunes API wants multiple terms separated by + symbols, so replace spaces with + signs
@@ -20,7 +23,7 @@ class iTunesAPI{
         
         // Now escape anything else that isn't URL-friendly
         if let escapedSearchTerm = itunesSearchTerm.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()){
-            let urlPath = "https://itunes.apple.com/search?term=\(escapedSearchTerm)&media=software"
+            let urlPath = "https://itunes.apple.com/search?term=\(escapedSearchTerm)&media=music&entity=album"
             let url = NSURL(string: urlPath)!
             //let request: NSURLRequest = NSURLRequest(URL: url)
             let session = NSURLSession.sharedSession()
@@ -34,7 +37,7 @@ class iTunesAPI{
                 do{ jsonResult = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
                     if jsonResult.count>0 && jsonResult["results"]!.count>0 {
                         let results: NSArray = jsonResult["results"] as! NSArray
-                        self.delegate?.didReceiveAPIResults(results)
+                        self.delegate.didReceiveAPIResults(results)
                     }
                 }
                 catch {}
